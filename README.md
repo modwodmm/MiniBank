@@ -9,4 +9,4 @@ This little bank has the following features:
 5. Can't deposit 0 or negative values.
 6. Roasts you on having >100.
 
-Don't clown on me for this being so noob level its for me.
+I'm new to java and I made this.
