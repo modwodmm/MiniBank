@@ -17,6 +17,5 @@ Withdrawl is limited to available balance and deposit can't be in negative.
 3. Have a bank account in a useless bank
 
 ## Why built it
-I built it to test my programming skills and the new stuff I learned.
-
+I built it to test my programming skills and to try out new concepts I learned.
 -made with jdk 21
