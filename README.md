@@ -1,12 +1,22 @@
 # MiniBank
-A lil bank I made to test out my beginner skills,
+A little bank I made with many features like deposite, withdraw and more coming with further releases.
 
-This little bank has the following features:
-1. Tells you balance (pin required).
-2. Lets you withdraw money (pin required).
-3. Can't withdraw if the amount is more than what you have.
-4. Lets you deposit money (pin required).
-5. Can't deposit 0 or negative values.
-6. Roasts you on having >100.
+## Features
+- Classes
+- Account creation
+- Pin protection
+- Deposit (pin protected)
+- Withdrawl (pin protected)
+- Shows balance
+- Roasts you for having less than $100
+Withdrawl is limited to available balance and deposit can't be in negative.
 
-I'm new to java and I made this.
+## How to run
+1. Compile program.
+2. Run 'main.java'.
+3. Have a bank account in a useless bank
+
+## Why built it
+I built it to test my programming skills and the new stuff I learned.
+
+-made with jdk 21
