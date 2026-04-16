@@ -1,68 +1,33 @@
-import java.util.Scanner;
+public class Account{
+	private String username;
+	private int pin;
+	private double balance;
+	
+//Constructor
+	public Account(String username, int pin, double balance){
+		this.username = username;
+		this.pin = pin;
+		this.balance = balance;
+	}
+	
+//Verifies pin	
+	public boolean checkPin(int enteredPin) {
+		return pin == enteredPin;
+	}
 
-public class Account {
-    Scanner scanner = new Scanner(System.in);
-    private String username;
-    private int pin;
-    private double balance;
+//Shows balance	
+	public double showBalance(){
+		return balance;
+	}
 
-    public void makeAccount(String username, int pin, double balance){
-        this.username = username;
-        this.pin = pin;
-        this.balance = balance;
-    }
+//Deposits money	
+	public double deposit(double amount) {
+		return balance += amount;
+	}
 
-    public void showBalance(){
-        System.out.println("Enter your pin:");
-        int enteredPin = scanner.nextInt();
-        if(enteredPin == pin){
-            if(balance <= 100){
-                System.out.println("Your balance is: " + balance);
-                System.out.println("You're kinda poor tbh");
-            }
-            else{
-                System.out.println("Your balance is: " + balance);
-            }
-        }
-        else{
-            System.out.println("You entered the wrong pin!!");
-        }
-    }
-
-    public void deposit(){
-        System.out.println("Enter your pin:");
-        int enteredPin1 = scanner.nextInt();
-        if(enteredPin1 == pin){
-            System.out.println("Enter the amount to deposit:");
-            double amountDeposited = scanner.nextDouble();
-            if(amountDeposited <= 0){
-                System.out.println("You can't deposit negative values or nothing!");
-            }
-            else{
-                balance += amountDeposited;
-                System.out.println("Your new balance is: " + balance);
-            }
-        }
-        else{
-            System.out.println("You entered the wrong pin!!");
-        }
-    }
-    public void withdraw() {
-        System.out.println("Enter your pin:");
-        int enteredPin2 = scanner.nextInt();
-        if(enteredPin2 == pin){
-            System.out.println("Enter the amount to withdraw:");
-            double amountWithdrawn = scanner.nextDouble();
-            if(balance < amountWithdrawn){
-                System.out.println("You don't have enough funds!");
-            }
-            else{
-                balance -= amountWithdrawn;
-                System.out.println("Your new balance is: " + balance);
-            }
-        }
-        else{
-            System.out.println("You entered the wrong pin!!");
-        }
-    }
+//Withdraws money	
+	public double withdraw(double amount) {
+		return balance -= amount;
+	}
+	
 }
