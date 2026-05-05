@@ -11,48 +11,54 @@ public class Main {
 //Checks pin and gives choices        
         int enteredPin = scanner.nextInt();
         if(account.checkPin(enteredPin)) {
-        	System.out.println("Choose one of the following:\n" + "1.Balance\n" + "2. Deposit\n" + "3. Withdraw");
-        	int choice = scanner.nextInt();    
- 
-//For showing balance        	
-        	if(choice == 1) {
+        	System.out.println("Choose one of the following:\n" + "- Balance\n" + "- Deposit\n" + "- Withdraw");
+        	String choice = scanner.next().toLowerCase();
+        	
+//Checks based on the choices        	
+        	switch(choice) {
+        	
+//Shows balance        	
+        	case "balance" : 
         		if(account.showBalance() < 100) {
-        			System.out.println("$" + account.showBalance() + "\nKinda poor tbh");
-        		}
-        		else {
-        			System.out.println("$" + account.showBalance());
-        		}
-        			
+            		System.out.println("Your balance is " + account.showBalance() + ". You are kinda poor tbh");
+            	}
+            	else {
+            		System.out.println("Your balance is " + account.showBalance());
+            	}
+        		break;
+        		
+//Deposits the given amount        	
+        	case "deposit" : 
+        		System.out.println("Enter the amount to deposit:");
+            	double depositAmount = scanner.nextDouble();
+            	if(depositAmount < 0 || depositAmount == 0) {
+            		System.out.println("You cannot deposit negative amount or nothing!");
+            	}
+            	else {
+            		System.out.println("Your new balance is " + account.deposit(depositAmount));
+            	}
+            	break;
+            	
+//Withdraw given amoun            	
+        	case "withdraw" : 
+        		System.out.println("Enter the amount to withdraw:");
+            	double withdrawalAmount = scanner.nextDouble();
+            	if(withdrawalAmount > account.showBalance() || withdrawlAmount < 0) {
+            		System.out.println("You cannot withdraw more than your balance or negative amounts!");
+            	}
+            	else {
+            		System.out.println("Your new balance is " + account.withdraw(withdrawalAmount));
+            	}
+            	break;
+            	
+        	default : System.out.println("That is not an option");
+        	
         	}
-  
-//For depositing money        	
-        	if(choice == 2) {
-        		System.out.println("Enter the amount:");
-        		double amount = scanner.nextDouble();
-        		if (amount <= 0) {
-        		    System.out.println("Invalid amount");
-        		} else {
-        		    account.deposit(amount);
-        		    System.out.println("New balance: $" + account.showBalance());
-        		}
-        	}
-  
-//For withdrawing money        	
-        	if(choice == 3) {
-        		System.out.println("Enter the amount:");
-        		double amount = scanner.nextDouble();
-        		if (amount <= 0 || amount > account.showBalance()) {
-        		    System.out.println("Invalid withdrawal");
-        		} else {
-        		    account.withdraw(amount);
-        		    System.out.println("New balance: $" + account.showBalance());
-        		}
-        	}
+ 
         }
-        
         else {
-        	System.out.println("Wrong pin!!");
+        	System.out.println("Wrong pin!!!");
         }
-       
+        	
     }
 }

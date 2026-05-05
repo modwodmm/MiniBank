@@ -21,13 +21,13 @@ public class Account{
 	}
 
 //Deposits money	
-	public double deposit(double amount) {
-		return balance += amount;
+	public double deposit(double depositAmount) {
+		return balance += depositAmount;
 	}
 
 //Withdraws money	
-	public double withdraw(double amount) {
-		return balance -= amount;
+	public double withdraw(double withdrawalAmount) {
+		return balance -= withdrawalAmount;
 	}
 	
 }
