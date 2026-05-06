@@ -43,7 +43,7 @@ public class Main {
         	case "withdraw" : 
         		System.out.println("Enter the amount to withdraw:");
             	double withdrawalAmount = scanner.nextDouble();
-            	if(withdrawalAmount > account.showBalance() || withdrawlAmount < 0) {
+            	if(withdrawalAmount > account.showBalance() || withdrawalAmount < 0) {
             		System.out.println("You cannot withdraw more than your balance or negative amounts!");
             	}
             	else {
