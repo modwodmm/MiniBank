@@ -4,7 +4,17 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         
-        Account account = new Account("modwodmm", 9898, 10);
+//Takes user info and creates account        
+        System.out.println("Enter the username: ");
+        String name = scanner.next();
+        
+        System.out.println("Enter the pin: ");
+        int pin = scanner.nextInt();
+        
+        System.out.println("Enter the starting amount: ");
+        double amount = scanner.nextDouble();
+        
+        Account account = new Account(name, pin, amount);
         
         System.out.println("Enter your pin:");
         
@@ -59,6 +69,8 @@ public class Main {
         else {
         	System.out.println("Wrong pin!!!");
         }
+        
+        scanner.close();
         	
     }
 }
