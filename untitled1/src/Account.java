@@ -21,13 +21,27 @@ public class Account{
 	}
 
 //Deposits money	
-	public double deposit(double depositAmount) {
-		return balance += depositAmount;
+	public boolean deposit(double depositAmount) {
+		if(depositAmount < 0 || depositAmount == 0) {
+        	System.out.println("You cannot deposit negative amount or nothing!");
+        	return false;
+        }
+		balance += depositAmount;
+		return true;
 	}
 
 //Withdraws money	
-	public double withdraw(double withdrawalAmount) {
-		return balance -= withdrawalAmount;
+	public boolean withdraw(double withdrawalAmount) {
+		if(withdrawalAmount > balance || withdrawalAmount < 0) {
+        	System.out.println("You cannot withdraw more than your balance or negative amounts!");
+        	return false;
+        }
+		balance -= withdrawalAmount;
+		return true;
+	}
+	
+	public String getUsername() {
+		return this.username;
 	}
 	
 }
