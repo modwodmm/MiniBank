@@ -7,8 +7,11 @@ public class Main {
         Bank bank = new Bank();
         bank.menu();
 
+//Outer loop        
         while(bank.isSuccess()) {
         	boolean logout = false;
+        	
+//Inner loop        	
         	while(!logout) {
         		System.out.println("Choose one of the following:\n1. Balance\n2. Deposit\n3. Withdraw\n4. Log out");
                 int choice = scanner.nextInt();
@@ -49,7 +52,8 @@ public class Main {
                         }
                 	}
                 	break;
-                    
+                	
+//Logout                    
                 case 4 :
                 	logout = true;
                 	bank.logout();

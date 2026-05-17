@@ -9,6 +9,7 @@ public class Bank {
 	private Account currentAccount;
 	private boolean success = false;
 	
+//Menu	
 	public void menu() {
 		while(true) {
 			if(count == 0) {
@@ -39,6 +40,7 @@ public class Bank {
 		
 	}
 	
+//Creates account	
 	public void createAccount() {
 		
 		if(count >= accounts.length) {
@@ -77,6 +79,7 @@ public class Bank {
 		}
 	}
 	
+//Login	
 	public void login() {
 		System.out.println("Enter your username:");
 		String target = scanner.next();
@@ -112,16 +115,18 @@ public class Bank {
 		}
 	}
 	
+//Logout	
 	public void logout() {
 		success = false;
 		currentAccount = null;
 	}
 	
-	
+//Success getter	
 	public boolean isSuccess() {
 		return success;
 	}
 	
+//Current Account getter	
 	public Account getCurrentAccount() {
 		return currentAccount;
 	}

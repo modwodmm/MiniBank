@@ -40,6 +40,7 @@ public class Account{
 		return true;
 	}
 	
+//Username getter	
 	public String getUsername() {
 		return this.username;
 	}
