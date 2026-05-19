@@ -1,17 +1,17 @@
 public class Account{
 	private String username;
-	private int pin;
+	private String pin;
 	private double balance;
 	
 //Constructor
-	public Account(String username, int pin, double balance){
+	public Account(String username, String pin, double balance){
 		this.username = username;
 		this.pin = pin;
 		this.balance = balance;
 	}
 	
 //Verifies pin	
-	public boolean checkPin(int enteredPin) {
+	public boolean checkPin(String enteredPin) {
 		return pin == enteredPin;
 	}
 

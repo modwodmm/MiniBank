@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 
 public class Bank {
 
@@ -12,13 +13,32 @@ public class Bank {
 //Menu	
 	public void menu() {
 		while(true) {
-			if(accounts.size() == 0) {
-				System.out.println("There are no accounts.\n1. Create new account");
+			
+			int choice = 0;
+			boolean correctChoice = false;
+			
+			while(!correctChoice) {
+				try {
+					
+					if(accounts.size() == 0) {
+						System.out.println("There are no accounts.\n1. Create new account");
+					}
+					else {
+						System.out.println("1. Create new account\n2. Login\n3. Exit");
+					}
+					choice = scanner.nextInt();
+					
+					correctChoice = true;
+					
+				}
+				catch(InputMismatchException e) {
+					
+					System.out.println("Please enter the number of the choice.");
+					scanner.nextLine();
+					
+				}
 			}
-			else {
-				System.out.println("1. Create new account\n2. Login\n3. Exit");
-			}
-			int choice = scanner.nextInt();
+			
 			switch(choice) {
 			case 1 :
 				createAccount();
@@ -51,9 +71,12 @@ public class Bank {
 		else {
 			
 			boolean exists = false;
-			
+			String name = "";
+			String pin = "";
+			double balance = 0;
+	        
 			System.out.println("Enter the username:");
-			String name = scanner.next();
+			name = scanner.next();
 			
 			for(int i = 0; i < accounts.size(); i++) {
 				if(accounts.get(i).getUsername().equalsIgnoreCase(name)) {
@@ -67,13 +90,24 @@ public class Bank {
 			else {
 				
 				System.out.println("Enter the pin:");
-				int pin = scanner.nextInt();
-				
-				double balance;
+				pin = scanner.next();
 				
 				while(true) {
-					System.out.println("Enter the starting amount:");
-					balance = scanner.nextDouble();
+					
+					boolean correctBalance = false;
+					
+					while(!correctBalance) {
+						try {
+							System.out.println("Enter the starting amount:");
+							balance = scanner.nextDouble();
+							correctBalance = true;
+						}
+						catch(InputMismatchException e) {
+							System.out.println("Please enter the actual amount.");
+							scanner.nextLine();
+						}
+					}
+					
 					if(balance > 0 && balance <= 100) {
 						break;
 					}
@@ -92,16 +126,17 @@ public class Bank {
 		String target = scanner.next();
 		
 		boolean found = false;
+		int tries = 0;
+		String enteredPin = "";
 		
 		for(int i = 0; i < accounts.size(); i++) {
 			
 			if(accounts.get(i).getUsername().equalsIgnoreCase(target)) {
 				found = true;
-				int tries = 0;
 				
 				while(tries < 3) {
 					System.out.println("Enter your pin:");
-					int enteredPin = scanner.nextInt();
+					enteredPin = scanner.next();
 					if(accounts.get(i).checkPin(enteredPin)) {
 						System.out.println("Logged in successfully!");
 						currentAccount = accounts.get(i);

@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 public class Main {
     public static void main(String[] args) {
@@ -6,20 +7,33 @@ public class Main {
         
         Bank bank = new Bank();
         bank.menu();
+    	boolean logout = false;
+    	int choice = 0;
 
 //Outer loop        
         while(bank.isSuccess()) {
-        	boolean logout = false;
-        	
+
 //Inner loop        	
         	while(!logout) {
-        		System.out.println("Choose one of the following:\n1. Balance\n2. Deposit\n3. Withdraw\n4. Log out");
-                int choice = scanner.nextInt();
-                	
-        //Checks based on the choices        	
+        	
+        		boolean correctChoice = false;
+        		
+        		while(!correctChoice) {
+        			try {
+            			System.out.println("Choose one of the following:\n1. Balance\n2. Deposit\n3. Withdraw\n4. Log out");
+                        choice = scanner.nextInt();
+                        correctChoice = true;
+            		}
+            		catch(InputMismatchException e) {
+            			System.out.println("Please enter the number of choice.");
+            			scanner.nextLine();
+            		}
+        		}
+        		
+//Checks based on the choices        	
                 switch(choice) {
                 	
-        //Shows balance        	
+//Shows balance        	
                 case 1 : 
                 	if(bank.getCurrentAccount().showBalance() < 100) {
                     	System.out.println("Your balance is " + bank.getCurrentAccount().showBalance() + ". You are kinda poor tbh");
@@ -29,11 +43,26 @@ public class Main {
                     }
                 	break;
                 		
-        //Deposits the given amount        	
+//Deposits the given amount        	
                 case 2 :
                 	while(true) {
-                		System.out.println("Enter the amount to deposit:");
-                        double depositAmount = scanner.nextDouble();
+                        double depositAmount = 0;
+                        boolean correctDeposit = false;
+                        
+                        while(!correctDeposit) {
+                        	
+                        	try {
+                        		System.out.println("Enter the amount to deposit:");
+                        		depositAmount = scanner.nextDouble();
+                        		correctDeposit = true;
+                        	}
+                        	catch(InputMismatchException e) {
+                        		System.out.println("Please enter an actual amount to deopist.");
+                        		scanner.nextLine();
+                        	}
+
+                        }
+                        
                         if(bank.getCurrentAccount().deposit(depositAmount)) {
                         	System.out.println("Your new balance is " + bank.getCurrentAccount().showBalance());
                             break;
@@ -41,11 +70,25 @@ public class Main {
                 	}
                 	break;
 
-        //Withdraw given amount           	
+//Withdraw given amount           	
                 case 3 : 
                 	while(true) {
-                		System.out.println("Enter the amount to withdraw:");
-                        double withdrawalAmount = scanner.nextDouble();
+                		
+                		boolean correctWithdrawal = false;
+                        double withdrawalAmount = 0;
+                        
+                        while(!correctWithdrawal) {
+                        	try {
+                        		System.out.println("Enter the amount to withdraw:");
+                        		withdrawalAmount = scanner.nextDouble();
+                        		correctWithdrawal = true;
+                        	}
+                        	catch(InputMismatchException e){
+                        		System.out.println("Please enter an actual amount to withdraw.");
+                        		scanner.nextLine();
+                        	}
+                        	
+                        }
                         if(bank.getCurrentAccount().withdraw(withdrawalAmount)) {
                         	System.out.println("Your new balance is " + bank.getCurrentAccount().showBalance());
                             break;
