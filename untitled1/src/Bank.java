@@ -24,7 +24,7 @@ public class Bank {
 						System.out.println("There are no accounts.\n1. Create new account");
 					}
 					else {
-						System.out.println("1. Create new account\n2. Login\n3. Exit");
+						System.out.println("1. Create new account\n2. Login\n3. Show accounts\n4. Exit");
 					}
 					choice = scanner.nextInt();
 					
@@ -42,9 +42,6 @@ public class Bank {
 			switch(choice) {
 			case 1 :
 				createAccount();
-				if(success) {
-					return;
-				}
 				break;
 			case 2 :
 				login();
@@ -53,6 +50,10 @@ public class Bank {
 				}
 				break;
 			case 3 :
+				for(int i = 0; i < accounts.size(); i++)
+					System.out.println(accounts.get(i));
+				break;
+			case 4:
 				System.out.println("You exited the program!");
 				return;
 			}

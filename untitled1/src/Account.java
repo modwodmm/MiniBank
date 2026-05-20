@@ -12,7 +12,7 @@ public class Account{
 	
 //Verifies pin	
 	public boolean checkPin(String enteredPin) {
-		return pin == enteredPin;
+		return pin.equals(enteredPin);
 	}
 
 //Shows balance	
@@ -43,6 +43,12 @@ public class Account{
 //Username getter	
 	public String getUsername() {
 		return this.username;
+	}
+	
+//Shows accounts	
+	@Override
+	public String toString() {
+		return "Name: " + this.username + " Balance: " + this.balance;
 	}
 	
 }

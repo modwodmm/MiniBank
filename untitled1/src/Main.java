@@ -101,6 +101,7 @@ public class Main {
                 	logout = true;
                 	bank.logout();
                 	bank.menu();
+                	logout = false;
                 	break;
                     	
                 default : System.out.println("That is not an option");
