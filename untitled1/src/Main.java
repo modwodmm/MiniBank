@@ -11,7 +11,7 @@ public class Main {
     	int choice = 0;
 
 //Outer loop        
-        while(bank.isSuccess()) {
+        while(bank.isLoggedin()) {
 
 //Inner loop        	
         	while(!logout) {

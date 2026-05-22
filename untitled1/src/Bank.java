@@ -6,12 +6,19 @@ public class Bank {
 
 	private Scanner scanner = new Scanner(System.in);
 	private ArrayList<Account> accounts = new ArrayList<>();
+	DataManager manager = new DataManager();
 	
 	private Account currentAccount;
-	private boolean success = false;
+	private boolean loggedin = false;
+	
+	
 	
 //Menu	
 	public void menu() {
+		
+		accounts.clear();
+		manager.reader(accounts);
+		
 		while(true) {
 			
 			int choice = 0;
@@ -45,7 +52,7 @@ public class Bank {
 				break;
 			case 2 :
 				login();
-				if(success) {
+				if(loggedin) {
 					return;
 				}
 				break;
@@ -80,7 +87,7 @@ public class Bank {
 			name = scanner.next();
 			
 			for(int i = 0; i < accounts.size(); i++) {
-				if(accounts.get(i).getUsername().equalsIgnoreCase(name)) {
+				if(accounts.get(i).getUsername().trim().equalsIgnoreCase(name)) {
 					exists = true;
 					break;
 				}
@@ -114,9 +121,10 @@ public class Bank {
 					}
 					System.out.println("Starting balance can't be negative or above 100");
 				}
+				
 				accounts.add(new Account(name, pin, balance));
+				manager.writer(accounts);
 				System.out.println("New account has been added.");
-				success = true;
 			}
 		}
 	}
@@ -141,7 +149,7 @@ public class Bank {
 					if(accounts.get(i).checkPin(enteredPin)) {
 						System.out.println("Logged in successfully!");
 						currentAccount = accounts.get(i);
-						success = true;
+						loggedin = true;
 						return;
 					}
 					tries++;
@@ -160,13 +168,13 @@ public class Bank {
 	
 //Logout	
 	public void logout() {
-		success = false;
+		loggedin = false;
 		currentAccount = null;
 	}
 	
 //Success getter	
-	public boolean isSuccess() {
-		return success;
+	public boolean isLoggedin() {
+		return loggedin;
 	}
 	
 //Current Account getter	

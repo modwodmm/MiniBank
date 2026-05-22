@@ -45,6 +45,16 @@ public class Account{
 		return this.username;
 	}
 	
+//Pin getter
+	public String getPin() {
+		return this.pin;
+	}
+	
+//Balance getter
+	public double getBalance() {
+		return this.balance;
+	}
+	
 //Shows accounts	
 	@Override
 	public String toString() {
