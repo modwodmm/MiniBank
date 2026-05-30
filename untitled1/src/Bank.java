@@ -1,18 +1,19 @@
 import java.util.Scanner;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 
 public class Bank {
 
-	private Scanner scanner = new Scanner(System.in);
+	private Scanner scanner;
 	private ArrayList<Account> accounts = new ArrayList<>();
 	DataManager manager = new DataManager();
 	
 	private Account currentAccount;
 	private boolean loggedin = false;
 	
-	
+	public Bank(Scanner scanner) {
+		this.scanner = scanner;
+	}
 	
 //Menu	
 	public void menu() {
@@ -34,15 +35,14 @@ public class Bank {
 					else {
 						System.out.println("1. Create new account\n2. Login\n3. Show accounts\n4. Exit");
 					}
-					choice = scanner.nextInt();
+					choice = Integer.parseInt(scanner.nextLine());
 					
 					correctChoice = true;
 					
 				}
-				catch(InputMismatchException e) {
+				catch(NumberFormatException e) {
 					
 					System.out.println("Please enter the number of the choice.");
-					scanner.nextLine();
 					
 				}
 			}
@@ -85,7 +85,7 @@ public class Bank {
 			BigDecimal balance = new BigDecimal("0");
 	        
 			System.out.println("Enter the username:");
-			name = scanner.next();
+			name = scanner.nextLine();
 			
 			for(int i = 0; i < accounts.size(); i++) {
 				if(accounts.get(i).getUsername().trim().equalsIgnoreCase(name)) {
@@ -99,7 +99,7 @@ public class Bank {
 			else {
 				
 				System.out.println("Enter the pin:");
-				pin = scanner.next();
+				pin = scanner.nextLine();
 				
 				while(true) {
 					
@@ -108,19 +108,18 @@ public class Bank {
 					while(!correctBalance) {
 						try {
 							System.out.println("Enter the starting amount:");
-							balance = scanner.nextBigDecimal();
+							balance = new BigDecimal(scanner.nextLine().trim());
 							correctBalance = true;
 						}
-						catch(InputMismatchException e) {
+						catch(NumberFormatException e) {
 							System.out.println("Please enter the actual amount.");
-							scanner.nextLine();
 						}
 					}
 					
 					if(balance.signum() > 0 && balance.compareTo(new BigDecimal("100")) < 0) {
 						break;
 					}
-					System.out.println("Starting balance can't be negative or above 100");
+					System.out.println("Starting balance can be between 1 and 100");
 				}
 				
 				accounts.add(new Account(name, pin, balance));
@@ -133,7 +132,7 @@ public class Bank {
 //Login	
 	public void login() {
 		System.out.println("Enter your username:");
-		String target = scanner.next();
+		String target = scanner.nextLine();
 		
 		boolean found = false;
 		int tries = 0;
@@ -146,7 +145,7 @@ public class Bank {
 				
 				while(tries < 3) {
 					System.out.println("Enter your pin:");
-					enteredPin = scanner.next();
+					enteredPin = scanner.nextLine();
 					if(accounts.get(i).checkPin(enteredPin)) {
 						System.out.println("Logged in successfully!");
 						currentAccount = accounts.get(i);
