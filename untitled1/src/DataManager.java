@@ -1,4 +1,5 @@
 import java.io.FileWriter;
+import java.math.BigDecimal;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ public class DataManager {
 			for(Account acc : accounts) {
 				writer.write(acc.getUsername() + "\n");
 				writer.write(acc.getPin() + "\n");
-				writer.write(acc.getBalance() + "\n");
+				writer.write(acc.showBalance() + "\n");
 			}
 		}
 		catch(IOException e) {
@@ -38,7 +39,7 @@ public class DataManager {
 					break;
 				}
 				
-				double balance = Double.parseDouble(balanceStr);
+				BigDecimal balance = new BigDecimal(balanceStr);
 				
 				Account account = new Account(username, pin, balance);
 				accounts.add(account);

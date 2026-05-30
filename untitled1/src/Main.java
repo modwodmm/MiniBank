@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.math.BigDecimal;
 import java.util.InputMismatchException;
 
 public class Main {
@@ -35,7 +36,7 @@ public class Main {
                 	
 //Shows balance        	
                 case 1 : 
-                	if(bank.getCurrentAccount().showBalance() < 100) {
+                	if(bank.getCurrentAccount().showBalance().compareTo(new BigDecimal("100")) < 0) {
                     	System.out.println("Your balance is " + bank.getCurrentAccount().showBalance() + ". You are kinda poor tbh");
                     }
                     else {
@@ -46,14 +47,14 @@ public class Main {
 //Deposits the given amount        	
                 case 2 :
                 	while(true) {
-                        double depositAmount = 0;
+                        BigDecimal depositAmount = new BigDecimal("0");
                         boolean correctDeposit = false;
                         
                         while(!correctDeposit) {
                         	
                         	try {
                         		System.out.println("Enter the amount to deposit:");
-                        		depositAmount = scanner.nextDouble();
+                        		depositAmount = scanner.nextBigDecimal();
                         		correctDeposit = true;
                         	}
                         	catch(InputMismatchException e) {
@@ -63,8 +64,7 @@ public class Main {
 
                         }
                         
-                        if(bank.getCurrentAccount().deposit(depositAmount)) {
-                        	System.out.println("Your new balance is " + bank.getCurrentAccount().showBalance());
+                        if(bank.getCurrentAccount().deposit(depositAmount)) {                        	
                             break;
                         }
                 	}
@@ -75,12 +75,12 @@ public class Main {
                 	while(true) {
                 		
                 		boolean correctWithdrawal = false;
-                        double withdrawalAmount = 0;
+                        BigDecimal withdrawalAmount = new BigDecimal("0");
                         
                         while(!correctWithdrawal) {
                         	try {
                         		System.out.println("Enter the amount to withdraw:");
-                        		withdrawalAmount = scanner.nextDouble();
+                        		withdrawalAmount = scanner.nextBigDecimal();
                         		correctWithdrawal = true;
                         	}
                         	catch(InputMismatchException e){
@@ -90,7 +90,6 @@ public class Main {
                         	
                         }
                         if(bank.getCurrentAccount().withdraw(withdrawalAmount)) {
-                        	System.out.println("Your new balance is " + bank.getCurrentAccount().showBalance());
                             break;
                         }
                 	}

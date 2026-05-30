@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 
@@ -81,7 +82,7 @@ public class Bank {
 			boolean exists = false;
 			String name = "";
 			String pin = "";
-			double balance = 0;
+			BigDecimal balance = new BigDecimal("0");
 	        
 			System.out.println("Enter the username:");
 			name = scanner.next();
@@ -107,7 +108,7 @@ public class Bank {
 					while(!correctBalance) {
 						try {
 							System.out.println("Enter the starting amount:");
-							balance = scanner.nextDouble();
+							balance = scanner.nextBigDecimal();
 							correctBalance = true;
 						}
 						catch(InputMismatchException e) {
@@ -116,7 +117,7 @@ public class Bank {
 						}
 					}
 					
-					if(balance > 0 && balance <= 100) {
+					if(balance.signum() > 0 && balance.compareTo(new BigDecimal("100")) < 0) {
 						break;
 					}
 					System.out.println("Starting balance can't be negative or above 100");

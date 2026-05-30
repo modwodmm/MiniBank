@@ -1,10 +1,12 @@
+import java.math.BigDecimal;
+
 public class Account{
 	private String username;
 	private String pin;
-	private double balance;
+	private BigDecimal balance;
 	
 //Constructor
-	public Account(String username, String pin, double balance){
+	public Account(String username, String pin, BigDecimal balance){
 		this.username = username;
 		this.pin = pin;
 		this.balance = balance;
@@ -16,27 +18,31 @@ public class Account{
 	}
 
 //Shows balance	
-	public double showBalance(){
+	public BigDecimal showBalance(){
 		return balance;
 	}
 
 //Deposits money	
-	public boolean deposit(double depositAmount) {
-		if(depositAmount < 0 || depositAmount == 0) {
+	public boolean deposit(BigDecimal depositAmount) {
+		if(depositAmount.signum() <= 0) {
         	System.out.println("You cannot deposit negative amount or nothing!");
         	return false;
         }
-		balance += depositAmount;
+		BigDecimal newBalance = balance.add(depositAmount);
+		balance = newBalance;
+		System.out.println("New balance: " + balance);
 		return true;
 	}
 
 //Withdraws money	
-	public boolean withdraw(double withdrawalAmount) {
-		if(withdrawalAmount > balance || withdrawalAmount < 0) {
+	public boolean withdraw(BigDecimal withdrawalAmount) {
+		if(withdrawalAmount.compareTo(balance) > 0 || withdrawalAmount.signum() <= 0) {
         	System.out.println("You cannot withdraw more than your balance or negative amounts!");
         	return false;
         }
-		balance -= withdrawalAmount;
+		BigDecimal remainingAmount = balance.subtract(withdrawalAmount);
+		balance = remainingAmount;
+		System.out.println("New balance: " + balance);
 		return true;
 	}
 	
@@ -48,11 +54,6 @@ public class Account{
 //Pin getter
 	public String getPin() {
 		return this.pin;
-	}
-	
-//Balance getter
-	public double getBalance() {
-		return this.balance;
 	}
 	
 //Shows accounts	
